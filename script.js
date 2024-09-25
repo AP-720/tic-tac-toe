@@ -17,11 +17,20 @@ return {getBoard, placeMarker, clearBoard}
 })();
 
 
-console.log(Gameboard.getBoard());
-console.log(Gameboard.placeMarker('X', 0));
-console.log(Gameboard.getBoard());
-console.log(Gameboard.clearBoard());
-console.log(Gameboard.getBoard());
+function Player (name, marker) {
+    return {name, marker};
+}
 
-// console.log(Gameboard.placeMarker('0', 0));
+const playerOne = Player("Andy", "O")
+const playerTwo = Player("Dot", "X")
+
+console.table({playerOne,playerTwo});
+
+// console.log(Gameboard.getBoard());
+// console.log(Gameboard.placeMarker('X', 0));
+// console.log(Gameboard.getBoard());
+// console.log(Gameboard.clearBoard());
+// console.log(Gameboard.getBoard());
+
+
 
