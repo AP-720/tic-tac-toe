@@ -1,4 +1,5 @@
-const Gameboard = (function () {
+// Gameboard IIFE
+const gameBoard = (function () {
 const board = ["","","","","","","","",""];
 
 const getBoard = () => board;
@@ -16,15 +17,55 @@ const clearBoard = () => {
 return {getBoard, placeMarker, clearBoard}
 })();
 
-
-function Player (name, marker) {
+// Create Player
+function CreatePlayer (name, marker) {
     return {name, marker};
 }
 
-const playerOne = Player("Andy", "O")
-const playerTwo = Player("Dot", "X")
+// const playerOne = createPlayer("Andy", "O")
+// const playerTwo = createPlayer("Dot", "X")
 
-console.table({playerOne,playerTwo});
+const gameController =(function(playerOneName = "Player One", playerTwoName = "Player Two") {
+
+    const board = gameBoard;
+
+    const players = [
+        CreatePlayer(playerOneName, "O"),
+        CreatePlayer(playerTwoName, "X"),
+    ];
+
+    let currentPlayer = players[0];
+
+    const switchPlayerTurn = () => {
+        currentPlayer = currentPlayer === players[0] ? players[1] : players[0];
+    };
+
+    const getCurrentPlayer = () => currentPlayer;
+
+    const printNewRound = () => {
+        console.log(board.getBoard());
+        console.log(`It's ${getCurrentPlayer().name}'s turn`)
+    }
+
+    const playRound = (index) => {
+        board.placeMarker(getCurrentPlayer().marker, index)
+
+        switchPlayerTurn();
+        printNewRound();
+    }
+
+    printNewRound();
+
+    return {playRound, getCurrentPlayer}
+
+})();
+
+const game = gameController;
+
+
+
+
+
 
 // console.log(Gameboard.getBoard());
 // console.log(Gameboard.placeMarker('X', 0));
