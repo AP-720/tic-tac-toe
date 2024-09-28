@@ -1,5 +1,106 @@
+:root {
+    --bg-color: #DFEFCA;
+    --text-color: #8B5E50;
+    --cell-size: 225px
+}
+
+@font-face {
+    font-family: 'Noto Sans';
+    src: url('/font/NotoSans-VariableFont_wdth\,wght.ttf') format('truetype');
+    font-weight: 100 900; /* Supports all weights from 100 to 900 */
+    font-style: normal;
+}
+
 body {
-    font-family: Arial, Helvetica, sans-serif;
-    background-color: #DFEFCA;
-    color: #8B5E50;
+    margin: 0;
+    font-family: 'Noto Sans', Arial, Helvetica, sans-serif;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+h1, h2 {
+    margin: 0;
+    
+}
+
+h1 {
+    text-align: center;
+    padding-top: 30px;
+    padding-bottom: 25px;
+    font-size: 3.2rem;
+    font-weight: 700;
+}
+
+h2 {
+    font-size: 2rem;
+    font-weight: 600;
+}
+
+/* Top Display */
+
+.top-display {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    padding-bottom: 50px;
+}
+
+.top-display span {
+    font-size: 2rem;
+    font-weight: 500;
+}
+
+.top-display button {
+    font-size: 1.5rem;
+    padding: 5px 25px;
+    border-radius: 25px;
+    margin: 0 15px;
+    background-color: #DECCF0;
+    border: 3px solid #513270;
+    color: #70325E;
+}
+
+.top-display button:hover {
+    border: 3px solid #70325E;
+}
+
+/* Board */
+
+.board {
+    /* border: 2px red solid; */
+    /* height: 70vh; */
+    /* width: 70vh; */
+    display: grid;
+    grid-template-columns: repeat(3, auto);
+}
+
+.cell {
+    border: 5px #70325E solid;
+    width: var(--cell-size);
+    height: var(--cell-size);
+    font-size: var(--cell-size);
+    line-height: var(--cell-size);
+    text-align: center;
+    color: #557032;
+    font-weight: 300;
+}
+
+.cell:first-child, .cell:nth-child(2), .cell:nth-child(3) {
+    border-top: none;
+}
+
+.cell:nth-child(3n + 1) {
+    border-left: none;
+}
+
+.cell:nth-child(3n + 3) {
+    border-right: none;
+  }
+
+.cell:nth-child(7), .cell:nth-child(8), .cell:last-child {
+    border-bottom: none;
 }
