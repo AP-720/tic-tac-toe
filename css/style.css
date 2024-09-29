@@ -1,13 +1,13 @@
 :root {
     --bg-color: #DFEFCA;
     --text-color: #8B5E50;
-    --cell-size: 225px
+    --cell-size: 200px
 }
 
 @font-face {
     font-family: 'Noto Sans';
     src: url('/font/NotoSans-VariableFont_wdth\,wght.ttf') format('truetype');
-    font-weight: 100 900; /* Supports all weights from 100 to 900 */
+    font-weight: 100 900;
     font-style: normal;
 }
 
@@ -72,10 +72,9 @@ h2 {
 
 .board {
     /* border: 2px red solid; */
-    /* height: 70vh; */
-    /* width: 70vh; */
     display: grid;
     grid-template-columns: repeat(3, auto);
+    padding-bottom: 50px;
 }
 
 .cell {
@@ -103,4 +102,108 @@ h2 {
 
 .cell:nth-child(7), .cell:nth-child(8), .cell:last-child {
     border-bottom: none;
+}
+
+/* Reset Button */
+
+.reset-btn {
+    font-size: 1.5rem;
+    padding: 5px 65.92px;
+    border-radius: 25px;
+    background-color: #513270;
+    border: 3px solid #557032;
+    color: #F0CCE5;
+}
+
+.reset-btn:hover {
+    border: 3px solid #DECCF0;
+    color: var(--bg-color);
+}
+
+/* Result Modal */
+
+.outcome-modal, .name-modal {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: #F0CCE5;
+    padding: 30px 100px;
+    border-radius: 25px;
+    border: 3px solid #513270;
+}
+
+.outcome-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.outcome-modal h2, .name-modal h2 {
+    padding-bottom: 20px;
+}
+
+.outcome-modal button {
+    font-size: 1.5rem;
+    padding: 5px 25px;
+    border-radius: 25px;
+    margin: 0 15px;
+    background-color: #DECCF0;
+    border: 3px solid #513270;
+    color: #70325E;
+}
+
+.outcome-modal button:hover {
+    border: 3px solid #70325E;
+}
+
+/* Add Name Modal */
+
+.input-containers {
+    padding-bottom: 5px;
+}
+
+.name-btns {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+
+.name-btns button {
+    font-size: 1.5rem;
+    padding: 5px 25px;
+    border-radius: 25px;
+    /* margin: 0 15px; */
+    background-color: #DECCF0;
+    border: 3px solid #513270;
+    color: #70325E;
+}
+
+.name-btns button:hover {
+    border: 3px solid #70325E;
+}
+
+form {
+    display: grid;
+    gap: 5px;
+    padding-bottom: 20px;
+    width: 100%;
+}
+
+label {
+    font-size: 1.5rem;
+    font-weight: 500;
+    display: block;
+    padding-bottom: 5px;
+    width: 100%;
+}
+
+input[type=text] {
+    width: 100%;
+    border-radius: 25px;
+    padding: 5px 15px;
+    border: 2px #557032 solid;
+    font-size: 1.2rem;
 }

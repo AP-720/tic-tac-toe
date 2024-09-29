@@ -13,12 +13,12 @@
     <h1>Tic-Tac-Toe</h1>
 
     <div class="top-display">
-        <h2 data-player-one-name="">Player One:</h2>
+        <h2 data-player-one-name>Player One:</h2>
         <span data-player-one-score>0</span>
 
-        <button>Start Game</button>
+        <button>Enter Name</button>
 
-        <h2 data-player-two-name="">Player Two:</h2>
+        <h2 data-player-two-name>Player Two:</h2>
         <span data-player-two-score>0</span>
     </div>
 
@@ -33,6 +33,37 @@
         <div class="cell" data-cell></div>
         <div class="cell" data-cell></div>
     </div>
-    
+
+    <button class="reset-btn" data-reset-btn>Reset</button>
+
+    <dialog data-outcome-modal>
+        <div class="outcome-modal">
+            <div class="outcome-container">
+                <h2 class="outcome" date-outcome-text>Player One is the winner!</h2>
+                <button data-play-again-btn>Play Again</button>
+            </div>
+        </div>
+    </dialog>
+
+    <dialog data-enter-name>
+        <div class="name-modal">
+            <h2>Enter Names</h2>
+            <form action="" id="players-name">
+                <div class="input-containers">
+                    <label for="player-one-name">Player One:</label>
+                    <input type="text" id="player-one-name" name="player-one-name">
+                </div>
+                <div class="input-containers">
+                    <label for="player-two-name">Player Two:</label>
+                    <input type="text" id="player-two-name" name="player-two-name">
+                </div>
+            </form>
+            <div class="name-btns">
+                <button type="button">Cancel</button>
+                <button type="submit" form="players-name" data-add-names>Done</button>
+            </div>
+        </div>
+    </dialog>
+
 </body>
 </html>
