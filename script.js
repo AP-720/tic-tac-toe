@@ -7,7 +7,7 @@ const getBoard = () => board;
 const placeMarker = function(marker, index) {
     if (board[index] === "") {
         board[index] = marker;
-    } else console.log('That spot is already taken. Try another one.');
+    }
 };
 
 const clearBoard = () => {
@@ -25,13 +25,14 @@ function CreatePlayer (name, marker) {
 // const playerOne = createPlayer("Andy", "O")
 // const playerTwo = createPlayer("Dot", "X")
 
-const gameController =(function(playerOneName = "Player One", playerTwoName = "Player Two") {
+const gameController =(function(playerOneName = "Player One", 
+    playerTwoName = "Player Two") {
 
     const board = gameBoard;
 
     const players = [
-        CreatePlayer(playerOneName, "O"),
-        CreatePlayer(playerTwoName, "X"),
+        CreatePlayer(playerOneName, "X"),
+        CreatePlayer(playerTwoName, "O"),
     ];
 
     let currentPlayer = players[0];
@@ -42,36 +43,44 @@ const gameController =(function(playerOneName = "Player One", playerTwoName = "P
 
     const getCurrentPlayer = () => currentPlayer;
 
-    const printNewRound = () => {
-        console.log(board.getBoard());
-        console.log(`It's ${getCurrentPlayer().name}'s turn`)
-    }
-
     const playRound = (index) => {
         board.placeMarker(getCurrentPlayer().marker, index)
 
         switchPlayerTurn();
-        printNewRound();
     }
-
-    printNewRound();
 
     return {playRound, getCurrentPlayer}
 
 })();
 
-const game = gameController;
+const renderDisplay = (function (){
+    const game = gameController;
+    const cells = document.querySelectorAll('[data-cell]')
+    const currentPlayer = game.getCurrentPlayer();
 
+    const renderBoard = () => {
+        const board = gameBoard.getBoard();
+        cells.forEach((cell, index) => {
+            cell.textContent = board[index];
+        })
+    }
 
+    function clickHandlerBoard(e) {
+        const index = e.target.dataset.cell;
+        if (!gameBoard.getBoard()[index]) {
+            game.playRound(index);
+            renderBoard();
+        }
+    }
 
+    cells.forEach(cell => cell.addEventListener('click', clickHandlerBoard));
 
+    renderDisplay()
+    // console.log();
+    // return {renderBoard}
+    
+})();
 
-
-// console.log(Gameboard.getBoard());
-// console.log(Gameboard.placeMarker('X', 0));
-// console.log(Gameboard.getBoard());
-// console.log(Gameboard.clearBoard());
-// console.log(Gameboard.getBoard());
 
 
 
