@@ -8,6 +8,7 @@ const placeMarker = function(marker, index) {
     if (board[index] === "") {
         board[index] = marker;
     }
+    gameController.checkWin()
 };
 
 const clearBoard = () => {
@@ -22,13 +23,23 @@ function CreatePlayer (name, marker) {
     return {name, marker};
 }
 
-// const playerOne = createPlayer("Andy", "O")
-// const playerTwo = createPlayer("Dot", "X")
+// Game Controller 
 
 const gameController =(function(playerOneName = "Player One", 
     playerTwoName = "Player Two") {
 
     const board = gameBoard;
+
+    const winCombinations = [
+        [0, 1, 2],
+        [3, 4, 5],
+        [6, 7, 8],
+        [0, 3, 6],
+        [1, 4, 7],
+        [2, 5, 8],
+        [0, 4, 8],
+        [2, 4, 6]
+    ];
 
     const players = [
         CreatePlayer(playerOneName, "X"),
@@ -43,20 +54,49 @@ const gameController =(function(playerOneName = "Player One",
 
     const getCurrentPlayer = () => currentPlayer;
 
+    const checkWin = function(board) {
+        board = gameBoard.getBoard();
+
+        for (let i = 0; i < winCombinations.length; i++) {
+            if (board[winCombinations[i][0]] !== "") {
+                if (board[winCombinations[i][0]] === board[winCombinations[i][1]] && 
+                    board[winCombinations[i][1]] === board[winCombinations[i][2]]) {
+                    return getCurrentPlayer().name;
+                }
+            }
+        }
+        return false;
+    };
+
+
     const playRound = (index) => {
-        board.placeMarker(getCurrentPlayer().marker, index)
+        board.placeMarker(getCurrentPlayer().marker, index);
 
-        switchPlayerTurn();
+        const winner = checkWin();
+        if (winner){
+            renderDisplay.showResults();
+            console.log(checkWin())
+        } else {
+            switchPlayerTurn();
+        }
+        
+
+        
+        
+        
     }
-
-    return {playRound, getCurrentPlayer}
+    
+    return {playRound, getCurrentPlayer, checkWin}
 
 })();
 
 const renderDisplay = (function (){
     const game = gameController;
     const cells = document.querySelectorAll('[data-cell]')
+    const enterName = document.querySelector('[data-enter-name-btn]')
+    const resultModal = document.querySelector('[data-outcome-modal]')
     const currentPlayer = game.getCurrentPlayer();
+    const resultText = document.querySelector('[date-outcome-text]')
 
     const renderBoard = () => {
         const board = gameBoard.getBoard();
@@ -65,6 +105,7 @@ const renderDisplay = (function (){
         })
     }
 
+    // Place Marker Click Event
     function clickHandlerBoard(e) {
         const index = e.target.dataset.cell;
         if (!gameBoard.getBoard()[index]) {
@@ -75,9 +116,15 @@ const renderDisplay = (function (){
 
     cells.forEach(cell => cell.addEventListener('click', clickHandlerBoard));
 
-    renderDisplay()
+   const showResults = () => {
+    resultModal.showModal();
+    resultText.textContent = `${gameController.checkWin()} is the winner!`;
+   }
+   
+
+    renderBoard()
     // console.log();
-    // return {renderBoard}
+    return {renderBoard, showResults}
     
 })();
 

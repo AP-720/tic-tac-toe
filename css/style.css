@@ -122,15 +122,22 @@ h2 {
 
 /* Result Modal */
 
+.outcome {
+    background-color: #F0CCE5;
+    padding: 6rem 10rem;
+    border-radius: 25px;
+    border: 3px solid #513270;
+}
+
 .outcome-modal, .name-modal {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    background-color: #F0CCE5;
+    /* background-color: #F0CCE5;
     padding: 30px 100px;
     border-radius: 25px;
-    border: 3px solid #513270;
+    border: 3px solid #513270; */
 }
 
 .outcome-container {
@@ -141,7 +148,9 @@ h2 {
 }
 
 .outcome-modal h2, .name-modal h2 {
-    padding-bottom: 20px;
+    padding-bottom: 30px;
+    color: var(--text-color);
+    font-size: 3rem;
 }
 
 .outcome-modal button {
