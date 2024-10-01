@@ -153,7 +153,13 @@ h2 {
     font-size: 3rem;
 }
 
-.outcome-modal button {
+.outcome-btns {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.confirm-btn {
     font-size: 1.5rem;
     padding: 5px 25px;
     border-radius: 25px;
@@ -163,7 +169,7 @@ h2 {
     color: #70325E;
 }
 
-.outcome-modal button:hover {
+.confirm-btn:hover {
     border: 3px solid #70325E;
 }
 
@@ -180,7 +186,7 @@ h2 {
     gap: 10px;
 }
 
-.name-btns button {
+.confirm-btn {
     font-size: 1.5rem;
     padding: 5px 25px;
     border-radius: 25px;
@@ -190,7 +196,7 @@ h2 {
     color: #70325E;
 }
 
-.name-btns button:hover {
+.confirm-btn:hover {
     border: 3px solid #70325E;
 }
 

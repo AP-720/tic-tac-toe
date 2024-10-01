@@ -20,7 +20,11 @@ return {getBoard, placeMarker, clearBoard}
 
 // Create Player
 function CreatePlayer (name, marker) {
-    return {name, marker};
+    let score = 0;
+    const getScore = () => score;
+    const increaseScore = () => score++;
+    const resetScore = () => score = 0;
+    return {name, marker, getScore, increaseScore, resetScore};
 }
 
 // Game Controller 
@@ -75,7 +79,6 @@ const gameController =(function(playerOneName = "Player One",
         const winner = checkWin();
         if (winner){
             renderDisplay.showResults();
-            console.log(checkWin())
         } else {
             switchPlayerTurn();
         }
@@ -85,18 +88,26 @@ const gameController =(function(playerOneName = "Player One",
         
         
     }
+
+    const resetScores = () => {
+        players.forEach(player => player.resetScore());
+    };
     
-    return {playRound, getCurrentPlayer, checkWin}
+    return {playRound, getCurrentPlayer, checkWin, resetScores}
 
 })();
 
 const renderDisplay = (function (){
     const game = gameController;
-    const cells = document.querySelectorAll('[data-cell]')
-    const enterName = document.querySelector('[data-enter-name-btn]')
-    const resultModal = document.querySelector('[data-outcome-modal]')
-    const currentPlayer = game.getCurrentPlayer();
-    const resultText = document.querySelector('[date-outcome-text]')
+    const board = gameBoard;
+    const cells = document.querySelectorAll('[data-cell]');
+    const enterName = document.querySelector('[data-enter-name-btn]');
+    const resultModal = document.querySelector('[data-outcome-modal]');
+    const resultText = document.querySelector('[date-outcome-text]');
+    const resetBtn = document.querySelectorAll('[data-reset-btn]');
+    const playAgainBtn = document.querySelector('[data-play-again-btn]');
+    const playerOneScore = document.querySelector('[data-player-one-score]');
+    const playerTwoScore = document.querySelector('[data-player-two-score]');
 
     const renderBoard = () => {
         const board = gameBoard.getBoard();
@@ -120,10 +131,46 @@ const renderDisplay = (function (){
     resultModal.showModal();
     resultText.textContent = `${gameController.checkWin()} is the winner!`;
    }
+
+    // Reset Button 
+   function clickReset() {
+    board.clearBoard();
+    renderBoard();
+
+    gameController.resetScores();
+    
+    playerOneScore.textContent = gameController.getCurrentPlayer().getScore();
+    playerTwoScore.textContent = gameController.getCurrentPlayer().getScore();
+
+    resultModal.close();
+   }
+
+   resetBtn.forEach(button => button.addEventListener('click', clickReset));
    
+    // Play Again Button 
+
+    function updateScore() {
+        winningPlayer = game.getCurrentPlayer()
+
+        if (winningPlayer.marker === "X") {
+            playerOneScore.textContent = winningPlayer.getScore();
+        } else {
+            playerTwoScore.textContent = winningPlayer.getScore();
+        }
+    }
+    
+    function playAgain() {
+        winningPlayer = game.getCurrentPlayer()
+        winningPlayer.increaseScore();
+        updateScore()
+        board.clearBoard();
+        renderBoard();
+        resultModal.close();
+    }
+
+    playAgainBtn.addEventListener('click', playAgain);
 
     renderBoard()
-    // console.log();
     return {renderBoard, showResults}
     
 })();

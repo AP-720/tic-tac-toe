@@ -40,7 +40,10 @@
         <div class="outcome-modal">
             <div class="outcome-container">
                 <h2 date-outcome-text>Player One is the winner!</h2>
-                <button data-play-again-btn>Play Again</button>
+                <div class="outcome-btns">
+                    <button type="button" class="reset-btn" data-reset-btn>Cancel</button>
+                    <button data-play-again-btn class="confirm-btn">Play Again</button>
+                </div>
             </div>
         </div>
     </dialog>
@@ -59,8 +62,8 @@
                 </div>
             </form>
             <div class="name-btns">
-                <button type="button">Cancel</button>
-                <button type="submit" form="players-name" data-add-names>Done</button>
+                <button type="button" class="reset-btn" data-cancel>Cancel</button>
+                <button type="submit" form="players-name" class="confirm-btn" data-add-names>Done</button>
             </div>
         </div>
     </dialog>
