@@ -59,6 +59,12 @@ const gameController = (function (
 
 	const getCurrentPlayer = () => currentPlayer;
 
+	const updatePlayerName = (newPlayerOneName, newPlayerTwoName) => {
+		players[0].name = newPlayerOneName;
+		players[1].name = newPlayerTwoName;
+		console.table(players);
+	};
+
 	const checkWin = function (board) {
 		board = gameBoard.getBoard();
 
@@ -86,7 +92,7 @@ const gameController = (function (
 		if (result === "It's a draw") {
 			renderDisplay.showResult(`It's a Draw`);
 		} else if (result) {
-			renderDisplay.showResult(`${getCurrentPlayer().name} is the winner!`);
+			renderDisplay.showResult(`${result} is the winner!`);
 			getCurrentPlayer().increaseScore();
 		} else {
 			switchPlayerTurn();
@@ -105,6 +111,7 @@ const gameController = (function (
 		playRound,
 		getCurrentPlayer,
 		switchPlayerTurn,
+		updatePlayerName,
 		checkWin,
 		resetScores,
 		getScores,
@@ -115,7 +122,12 @@ const renderDisplay = (function () {
 	const game = gameController;
 	const board = gameBoard;
 	const cells = document.querySelectorAll("[data-cell]");
-	const enterName = document.querySelector("[data-enter-name-btn]");
+	const enterNameBtn = document.querySelector("[data-enter-name-btn]");
+	const enterNameModal = document.querySelector("[data-enter-name]");
+	const doneBtn = document.getElementById("players-name");
+	const playerOneName = document.querySelector("[data-player-one-name]");
+	const playerTwoName = document.querySelector("[data-player-two-name]");
+	const cancelBtn = document.querySelector("[data-cancel]");
 	const resultModal = document.querySelector("[data-outcome-modal]");
 	const resultText = document.querySelector("[date-outcome-text]");
 	const resetBtn = document.querySelectorAll("[data-reset-btn]");
@@ -146,6 +158,43 @@ const renderDisplay = (function () {
 		resultText.textContent = message;
 	};
 
+	// Enter Name
+
+	const getEnterName = () => {
+		enterNameModal.showModal();
+	};
+
+	enterNameBtn.addEventListener("click", getEnterName);
+
+	const updateNames = () => {
+		let getPlayerOneName = document.getElementById("player-one-name").value;
+		let getPlayerTwoName = document.getElementById("player-two-name").value;
+
+		gameController.updatePlayerName(getPlayerOneName, getPlayerTwoName);
+
+		playerOneName.textContent = `${getPlayerOneName}:`;
+		playerTwoName.textContent = `${getPlayerTwoName}:`;
+
+		console.log(getPlayerOneName, getPlayerTwoName);
+
+		document.getElementById("players-name").reset();
+		enterNameModal.close();
+	};
+
+	doneBtn.addEventListener("submit", (e) => {
+		if (doneBtn.checkValidity()) {
+			e.preventDefault();
+			updateNames();
+		}
+	});
+
+	const cancelName = () => {
+		document.getElementById("players-name").reset();
+		enterNameModal.close();
+	};
+
+	cancelBtn.addEventListener("click", cancelName);
+
 	// Reset Button
 	function clickReset() {
 		board.clearBoard();
@@ -159,6 +208,11 @@ const renderDisplay = (function () {
 		if (gameController.getCurrentPlayer().marker !== "X") {
 			gameController.switchPlayerTurn();
 		}
+
+		gameController.updatePlayerName("Player One:", "Player Two:");
+
+		playerOneName.textContent = `Player One:`;
+		playerTwoName.textContent = `Player Two:`;
 
 		resultModal.close();
 	}

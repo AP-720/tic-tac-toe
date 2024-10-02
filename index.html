@@ -1,72 +1,89 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tic Tac Toe</title>
-    <link rel="stylesheet" href="/css/reset.css">
-    <link rel="stylesheet" href="/css/style.css">
-    <script src="script.js" defer></script>
-</head>
-<body>
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Tic Tac Toe</title>
+		<link rel="stylesheet" href="/css/reset.css" />
+		<link rel="stylesheet" href="/css/style.css" />
+		<script src="script.js" defer></script>
+	</head>
+	<body>
+		<h1>Tic-Tac-Toe</h1>
 
-    <h1>Tic-Tac-Toe</h1>
+		<div class="top-display">
+			<h2 data-player-one-name>Player One:</h2>
+			<span data-player-one-score>0</span>
 
-    <div class="top-display">
-        <h2 data-player-one-name>Player One:</h2>
-        <span data-player-one-score>0</span>
+			<button data-enter-name-btn>Enter Name</button>
 
-        <button data-enter-name-btn>Enter Name</button>
+			<h2 data-player-two-name>Player Two:</h2>
+			<span data-player-two-score>0</span>
+		</div>
 
-        <h2 data-player-two-name>Player Two:</h2>
-        <span data-player-two-score>0</span>
-    </div>
+		<div class="board">
+			<div class="cell" data-cell="0"></div>
+			<div class="cell" data-cell="1"></div>
+			<div class="cell" data-cell="2"></div>
+			<div class="cell" data-cell="3"></div>
+			<div class="cell" data-cell="4"></div>
+			<div class="cell" data-cell="5"></div>
+			<div class="cell" data-cell="6"></div>
+			<div class="cell" data-cell="7"></div>
+			<div class="cell" data-cell="8"></div>
+		</div>
 
-    <div class="board">
-        <div class="cell" data-cell="0"></div>
-        <div class="cell" data-cell="1"></div>
-        <div class="cell" data-cell="2"></div>
-        <div class="cell" data-cell="3"></div>
-        <div class="cell" data-cell="4"></div>
-        <div class="cell" data-cell="5"></div>
-        <div class="cell" data-cell="6"></div>
-        <div class="cell" data-cell="7"></div>
-        <div class="cell" data-cell="8"></div>
-    </div>
+		<button class="reset-btn" data-reset-btn>Reset</button>
 
-    <button class="reset-btn" data-reset-btn>Reset</button>
+		<dialog class="outcome" data-outcome-modal>
+			<div class="outcome-modal">
+				<div class="outcome-container">
+					<h2 date-outcome-text>Player One is the winner!</h2>
+					<div class="outcome-btns">
+						<button type="button" class="reset-btn" data-reset-btn>
+							Cancel
+						</button>
+						<button data-play-again-btn class="confirm-btn">Play Again</button>
+					</div>
+				</div>
+			</div>
+		</dialog>
 
-    <dialog class="outcome" data-outcome-modal>
-        <div class="outcome-modal">
-            <div class="outcome-container">
-                <h2 date-outcome-text>Player One is the winner!</h2>
-                <div class="outcome-btns">
-                    <button type="button" class="reset-btn" data-reset-btn>Cancel</button>
-                    <button data-play-again-btn class="confirm-btn">Play Again</button>
-                </div>
-            </div>
-        </div>
-    </dialog>
-
-    <dialog data-enter-name>
-        <div class="name-modal">
-            <h2>Enter Names</h2>
-            <form action="" id="players-name">
-                <div class="input-containers">
-                    <label for="player-one-name">Player One:</label>
-                    <input type="text" id="player-one-name" name="player-one-name">
-                </div>
-                <div class="input-containers">
-                    <label for="player-two-name">Player Two:</label>
-                    <input type="text" id="player-two-name" name="player-two-name">
-                </div>
-            </form>
-            <div class="name-btns">
-                <button type="button" class="reset-btn" data-cancel>Cancel</button>
-                <button type="submit" form="players-name" class="confirm-btn" data-add-names>Done</button>
-            </div>
-        </div>
-    </dialog>
-
-</body>
+		<dialog class="enter-name-modal" data-enter-name>
+			<div class="name-modal">
+				<h2>Enter Names</h2>
+				<form action="" id="players-name">
+					<div class="input-containers">
+						<label for="player-one-name">Player One:</label>
+						<input
+							type="text"
+							id="player-one-name"
+							name="player-one-name"
+							required
+						/>
+					</div>
+					<div class="input-containers">
+						<label for="player-two-name">Player Two:</label>
+						<input
+							type="text"
+							id="player-two-name"
+							name="player-two-name"
+							required
+						/>
+					</div>
+				</form>
+				<div class="name-btns">
+					<button type="button" class="reset-btn" data-cancel>Cancel</button>
+					<button
+						type="submit"
+						form="players-name"
+						class="confirm-btn"
+						data-add-names
+					>
+						Done
+					</button>
+				</div>
+			</div>
+		</dialog>
+	</body>
 </html>
